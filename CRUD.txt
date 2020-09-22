@@ -1,0 +1,36 @@
+1---- create db
+use contact
+
+2----- create collection
+db.createCollection("contactlist)
+
+
+3------ insert 3 ppl
+db.contactlist.insertMany([
+{"Last name":"Ben Lahmer","First name":"Fares","Email":"fares@gmail.com","age":26},
+ {"Last name":"Kefi","First name":"Seif","Email":"kefi@gmail.com","age":15},
+{"Last name":"Fatnassi","First name":"Sarra","Email":"sarra.f@gmail.com","age":40},
+ {"Last name":"Ben Yahia","First name":"Rym","age":4},
+{"Last name":"Cherif","First name":"Sami","age":3}
+])
+
+4---------- display all contactlist
+db.contactlist.find().pretty()
+
+5-------- display one person info using id
+db.contactlist.find({"_id" : ObjectId("5f4bd8699def167b7b8a7bc6"})
+
+6-------- display list age>18
+db.contactlist.find({age:{$gt:18}}).pretty()
+
+7-------- display list age>18 & name containing "ah"
+db.contactlist.find({age:{$gt:18}, "Last Name" : /ah/, "First Name" : /ah/)}.pretty()
+
+8----------- change seif par anis
+db.contactlist.update({"Last Name" : "Kefi", "First Name" : "Seif"}, {$set:{"First Name" : "Anis"}})
+
+9--------- delete contact age<5
+db.contactlist.remove({age:{$lt:5}})
+
+10---------- display all contactlist
+db.contactlist.find().pretty()
